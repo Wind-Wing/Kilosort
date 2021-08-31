@@ -1,4 +1,4 @@
-function read_Intan_RHD2000_file
+function read_Intan_RHD2000_file(path, file)
 
 % read_Intan_RHD2000_file
 %
@@ -17,15 +17,13 @@ function read_Intan_RHD2000_file
 % >> amplifier_channels(1)
 % >> plot(t_amplifier, amplifier_data(1,:))
 
-[file, path, filterindex] = ...
-    uigetfile('*.rhd', 'Select an RHD2000 Data File', 'MultiSelect', 'off');
-
-if (file == 0)
-    return;
-end
+%[file, path, filterindex] = ...
+%    uigetfile('*.rhd', 'Select an RHD2000 Data File', 'MultiSelect', 'off');
+% file = "";
+% path = "";
 
 tic;
-filename = [path,file];
+filename = path + file;
 fid = fopen(filename, 'r');
 
 s = dir(filename);
@@ -279,7 +277,7 @@ if (bytes_remaining > 0)
     data_present = 1;
 end
 
-num_data_blocks = bytes_remaining / bytes_per_block;
+num_data_blocks = round(bytes_remaining / bytes_per_block * 1);
 
 num_amplifier_samples = num_samples_per_data_block * num_data_blocks;
 num_aux_input_samples = (num_samples_per_data_block / 4) * num_data_blocks;
