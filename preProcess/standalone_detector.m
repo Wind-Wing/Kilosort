@@ -24,7 +24,8 @@ rez.wPCA  = gather(wPCA);
 
 % Get nearest channels for every template center. 
 % Template products will only be computed on these channels. 
-NchanNear = 10;
+% NchanNear = 10;
+NchanNear = min(10,length(ops.xup));
 [iC, dist] = getClosestChannels2(ycup, xcup, rez.yc, rez.xc, NchanNear);
 
 % Templates with centers that are far from an active site are discarded
