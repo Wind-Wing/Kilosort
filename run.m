@@ -1,12 +1,11 @@
-path = "/media/wind/Data Disk/intan/CA_sleep_210822_102231/";
-file = "CA_sleep_210822_102231.rhd";
+%% Split Channels
+path = "/media/wind/Data Disk/intan/HB_210819_160638/";
+file = "HB_210819_160638.rhd";
 
-channel_1 = [8, 18, 16, 6, 20, 19, 9, 5,...
-    10, 24, 22, 11, 23, 7, 21, 17] + 1;
-channel_2 = [4, 26, 12, 2, 28, 14, 3, 27,...
-    13, 1, 34, 31, 30, 0, 29, 25] + 1;
-channel_3 = [43, 35, 42, 45, 33, 40, 44, 37,...
-    41 ,46, 39, 15, 32, 47, 36, 38] + 1;
+% Three probes
+channel_1 = [10, 8, 24, 18, 22, 16, 11, 6, 23, 20, 7, 19, 21, 9, 17, 5] + 1;
+channel_2 = [13, 4, 1, 26, 34, 12, 31, 2, 30, 28, 0, 14, 19, 3, 25, 27] + 1;
+channel_3 = [41, 43, 46, 35, 39, 42, 15, 45, 32, 33, 47, 40, 36, 44, 38, 37] + 1;
 channel_4 = [] + 1;
 
 read_Intan_RHD2000_file(path, file);
@@ -26,3 +25,5 @@ mkdir(path + "sorting/3/");
 fid = fopen(path + "sorting/3/data.bin", 'w');
 fwrite(fid, amplifier_data(channel_3, :), 'int16');
 fclose(fid);
+
+%% Sorting Spikes
