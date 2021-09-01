@@ -1,4 +1,4 @@
-function read_Intan_RHD2000_file(path, file)
+function read_Intan_RHD2000_file(path, file, clip_time)
 
 % read_Intan_RHD2000_file
 %
@@ -277,19 +277,26 @@ if (bytes_remaining > 0)
     data_present = 1;
 end
 
-num_data_blocks = round(bytes_remaining / bytes_per_block * 1);
 
+record_time = (bytes_remaining / bytes_per_block) * num_samples_per_data_block / sample_rate;
+fprintf(1, 'File contains %0.3f seconds of data.\n', record_time);
+if (and((clip_time ~= 0), (clip_time < record_time)))
+    num_data_blocks = round(sample_rate * clip_time / num_samples_per_data_block);
+else
+    num_data_blocks = bytes_remaining / bytes_per_block;
+end
 num_amplifier_samples = num_samples_per_data_block * num_data_blocks;
+record_time = num_amplifier_samples / sample_rate;
+
+
 num_aux_input_samples = (num_samples_per_data_block / 4) * num_data_blocks;
 num_supply_voltage_samples = 1 * num_data_blocks;
 num_board_adc_samples = num_samples_per_data_block * num_data_blocks;
 num_board_dig_in_samples = num_samples_per_data_block * num_data_blocks;
 num_board_dig_out_samples = num_samples_per_data_block * num_data_blocks;
 
-record_time = num_amplifier_samples / sample_rate;
-
 if (data_present)
-    fprintf(1, 'File contains %0.3f seconds of data.  Amplifiers were sampled at %0.2f kS/s.\n', ...
+    fprintf(1, 'Take %0.3f seconds of data.  Amplifiers were sampled at %0.2f kS/s.\n', ...
         record_time, sample_rate / 1000);
     fprintf(1, '\n');
 else
