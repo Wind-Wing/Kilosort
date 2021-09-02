@@ -1,4 +1,4 @@
-function read_Intan_RHD2000_file(path, file, clip_time)
+function read_Intan_RHD2000_file(path, file, start_time, end_time)
 
 % read_Intan_RHD2000_file
 %
@@ -280,8 +280,8 @@ end
 
 record_time = (bytes_remaining / bytes_per_block) * num_samples_per_data_block / sample_rate;
 fprintf(1, 'File contains %0.3f seconds of data.\n', record_time);
-if (and((clip_time ~= 0), (clip_time < record_time)))
-    num_data_blocks = round(sample_rate * clip_time / num_samples_per_data_block);
+if ((start_time ~= 0) && (end_time ~= 0) && (start_time < end_time) && (end_time < record_time))
+    num_data_blocks = round(sample_rate * (end_time - start_time) / num_samples_per_data_block);
 else
     num_data_blocks = bytes_remaining / bytes_per_block;
 end
