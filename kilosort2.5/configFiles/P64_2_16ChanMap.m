@@ -16,6 +16,7 @@ xcoords = reshape(repmat([24 0], [1, 8]), [16, 1]);
 %ycoords = [(1:8)*-25 (1:8)*-25+13];
 %ycoords = ycoords';
 ycoords = reshape([(0:7)*25; (0:7)*25+13], [16, 1]);
+ycoords = ycoords * -1;
 
 kcoords = ones(16,1);
 
