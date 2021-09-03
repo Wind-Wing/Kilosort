@@ -1,6 +1,6 @@
-function run_kilosort(ops)
+function run_kilosort25(ops)
     %% you need to change most of the paths in this block
-    addpath(genpath('/home/wind/Desktop/Kilosort/kilosort2.5')) % path to kilosort folder
+    addpath(genpath('/home/wind/Desktop/Kilosort/kilosort-2.5')) % path to kilosort folder
     addpath('/home/wind/Desktop/npy-matlab') % for converting to Phy    
 
     rootZ = ops.fbinary; % the raw data binary file is in this folder

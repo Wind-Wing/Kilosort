@@ -1,4 +1,4 @@
-ops.chanMap = '/home/wind/Desktop/Kilosort/kilosort2.5/configFiles/P64_2_16ChanMap.mat';
+ops.chanMap = '/home/wind/Desktop/Kilosort/kilosort-2.5/configFiles/P64_2_16ChanMap.mat';
 % ops.chanMap = 1:ops.Nchan; % treated as linear probe if no chanMap file
 
 ops.fbinary = "";
@@ -50,5 +50,3 @@ ops.nSkipCov            = 25; % compute whitening matrix from every N-th batch
 ops.scaleproc           = 200;   % int16 scaling of whitened data
 ops.nPCs                = 3; % how many PCs to project the spikes into
 ops.useRAM              = 0; % not yet available
-
-%%
