@@ -29,13 +29,22 @@ function main(generate_file)
         fid = fopen(path + "sorting/3/data.bin", 'w');
         fwrite(fid, amplifier_data(channel_3, :), 'int16');
         fclose(fid);
+        
+        % mkdir(path + "sorting/all/");
+        % fid = fopen(path + "sorting/all/data.bin", 'w');
+        % fwrite(fid, amplifier_data([channel_1 channel_2 channel_3], :), 'int16');
+        % fclose(fid);
     end
 
-    %% Sorting Spikes
+    %% Load Config
     run("./config.m")
-
-    for i=['1','2','3']
+    
+    %% Sorting All
+    % ops.fbinary = path + "sorting/all/";
+    % run_kilosort30(ops);
+    
+    %% Sorting Channels
+    for i=['1', '2', '3']
         ops.fbinary = path + "sorting/" + i + "/";
-        ops.root = ops.root;
-        run_kilosort(ops);
+        run_kilosort30(ops);
     end
