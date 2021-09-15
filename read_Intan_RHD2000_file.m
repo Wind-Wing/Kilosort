@@ -1,4 +1,4 @@
-function read_Intan_RHD2000_file(path, file, start_time, end_time)
+function amplifier_data = read_Intan_RHD2000_file(path, file, start_time, end_time)
 
 % read_Intan_RHD2000_file
 %
@@ -23,7 +23,7 @@ function read_Intan_RHD2000_file(path, file, start_time, end_time)
 % path = "";
 
 tic;
-filename = path + file;
+filename = path + file
 fid = fopen(filename, 'r');
 
 s = dir(filename);

@@ -21,7 +21,7 @@ fprintf('Looking for data inside %s \n', rootZ)
 
 % main parameter changes from Kilosort2 to v2.5
 ops.sig        = 20;  % spatial smoothness constant for registration
-ops.fshigh     = 300; % high-pass more aggresively
+ops.fshigh     = 500; % high-pass more aggresively
 ops.nblocks    = 5; % blocks for registration. 0 turns it off, 1 does rigid registration. Replaces "datashift" option. 
 
 % main parameter changes from Kilosort2.5 to v3.0
