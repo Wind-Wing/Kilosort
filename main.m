@@ -2,11 +2,11 @@ function main()
     src_dir = "/media/wind/Data Disk/FearCondition/intan/";
     tar_dir = "/media/wind/Data Disk/FearCondition/databin/";
     file_list = ["HA_210819_091933", "HB_210819_160638", "HA_sleep_210819_101454", "CA_sleep_210822_102231", "TA_210823_083732"];
-%     convert(src_dir, file_list, tar_dir);
+    convert(src_dir, file_list, tar_dir);
     
     concate(tar_dir, file_list);
  
-%     sort(tar_dir);
+    sort(tar_dir);
 end
 
 % Convert rhd file into bin file
@@ -20,14 +20,14 @@ function convert(src_dir, file_list, target_dir)
     
     for file_name = file_list
         disp(file_name);
-        amplifier_data = read_Intan_RHD2000_file(src_dir, file_name + "/" + file_name + ".rhd", 0, 17400);
+        amplifier_data = read_Intan_RHD2000_file(src_dir, file_name + "/" + file_name + ".rhd", 0, 0);
         amplifier_data = int16(amplifier_data);
         size(amplifier_data)
     
         fid = fopen(target_dir + file_name + "_1.bin", 'w');
         fwrite(fid, amplifier_data(channel_1, :), 'int16');
         fclose(fid);
-        
+         
         fid = fopen(target_dir + file_name + "_2.bin", 'w');
         fwrite(fid, amplifier_data(channel_2, :), 'int16');
         fclose(fid);
@@ -36,16 +36,16 @@ end
 
 % Concate files
 function concate(file_dir, file_list)
-    info = containers.Map;
     for surfix=["_1.bin", "_2.bin"]
-        all_data = [];
+        all_data = [];    
+        num_sample = [];
         for file_name = file_list
             disp(file_name + surfix);
             fid = fopen(file_dir + file_name + surfix, 'r');
             data = fread(fid, '*int16');
             fclose(fid);
             
-            info(file_name) = length(data);
+            num_sample = [num_sample length(data)];
             all_data = [all_data; data];
         end
 
@@ -53,7 +53,7 @@ function concate(file_dir, file_list)
 %         fid = fopen(file_dir + "data" + surfix, 'w');
 %         fwrite(fid, all_data, 'int16');
 %         fclose(fid);
-        save(fullfile(file_dir, 'datainfo.mat'), 'info');
+        save(fullfile(file_dir, 'datainfo.mat'), 'num_sample', 'file_list');
 
     end
 end
