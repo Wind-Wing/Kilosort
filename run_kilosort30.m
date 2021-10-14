@@ -1,7 +1,6 @@
 function run_kilosort30(ops)
 %% you need to change most of the paths in this block
-
-addpath(genpath('/home/wind/Desktop/Kilosort/kilosort-3.0')) % path to kilosort folder
+addpath(genpath(pwd + "/kilosort-3.0")) % path to kilosort folder
 addpath('/home/wind/Desktop/npy-matlab') % for converting to Phy
 
 rootZ = ops.fbinary; % the raw data binary file is in this folder
@@ -34,7 +33,7 @@ if ~isempty(fs)
 end
 
 % find the binary file
-fs          = [dir(fullfile(rootZ, '*.bin')) dir(fullfile(rootZ, '*.dat'))];
+fs          = dir(fullfile(rootZ, "data_" + ops.output_surfix + ".bin"));
 ops.fbinary = fullfile(rootZ, fs(1).name);
 
 rez                = preprocessDataSub(ops);
@@ -50,7 +49,7 @@ rez                = final_clustering(rez, tF, st3);
 
 rez                = find_merges(rez, 1);
 
-rootZ = fullfile(rootZ, 'kilosort3');
+rootZ = fullfile(rootZ, 'kilosort3_' + ops.output_surfix);
 mkdir(rootZ)
 rezToPhy2(rez, rootZ);
 

@@ -1,4 +1,4 @@
-ops.chanMap = '/home/wind/Desktop/Kilosort/kilosort-2.5/configFiles/P64_2_16ChanMap.mat';
+ops.chanMap = pwd + "/kilosort-2.5/configFiles/P64_2_16ChanMap.mat"
 % ops.chanMap = 1:ops.Nchan; % treated as linear probe if no chanMap file
 
 ops.fbinary = "";

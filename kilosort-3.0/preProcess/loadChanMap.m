@@ -30,7 +30,7 @@ function [chanMap, xcoords, ycoords, kcoords, NchanTOT] = loadChanMap(cmIn)
 % 
 % ops.Nchan should then be numel(chanMap)
 
-if ischar(cmIn)    
+if ischar(cmIn) || isstring(cmIn) 
     if exist(cmIn, 'file')        
         cmIn = load(cmIn);
     else

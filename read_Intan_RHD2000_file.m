@@ -23,7 +23,7 @@ function amplifier_data = read_Intan_RHD2000_file(path, file, start_time, end_ti
 % path = "";
 
 tic;
-filename = path + file
+filename = path + file;
 fid = fopen(filename, 'r');
 
 s = dir(filename);
@@ -287,7 +287,7 @@ else
 end
 num_amplifier_samples = num_samples_per_data_block * num_data_blocks;
 record_time = num_amplifier_samples / sample_rate;
-
+disp(num_amplifier_samples);
 
 num_aux_input_samples = (num_samples_per_data_block / 4) * num_data_blocks;
 num_supply_voltage_samples = 1 * num_data_blocks;
