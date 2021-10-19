@@ -1,4 +1,4 @@
-function amplifier_data = read_Intan_RHD2000_file(path, file, start_time, end_time)
+function [amplifier_data, board_dig_in_data] = read_Intan_RHD2000_file(path, file, start_time, end_time)
 
 % read_Intan_RHD2000_file
 %
